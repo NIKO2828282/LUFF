@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Staff Login Page</title>
+</head>
+<body>
+    <h2>Staff Login Page</h2>
+    <form onsubmit="return validateLogin()">
+        <label for="idnumber">ID Number:</label>
+        <input type="text" id="idnumber" name="idnumber" required>
+        <br><br>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br><br>
+        <input type="submit" value="Login">
+    </form>
+
+    <script>
+        const allowList = [
+            { username: 'staff1', idnumber: '12345', password: 'password1' },
+            { username: 'staff2', idnumber: '23456', password: 'password2' },
+            { username: 'staff3', idnumber: '34567', password: 'password3' }
+        ]; // Add allowed username, ID number, and password pairs here
+
+        function validateLogin() {
+            const idnumber = document.getElementById('idnumber').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const user = allowList.find(user => user.username === username && user.idnumber === idnumber && user.password === password);
+            if (user) {
+                alert('Login successful!');
+                return true;
+            } else {
+                alert('Login failed: Username, ID number, or password not allowed.');
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
