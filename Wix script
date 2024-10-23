@@ -2,6 +2,11 @@
 <html>
 <head>
     <title>Staff Login Page</title>
+    <style>
+        .message {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <h2>Staff Login Page</h2>
@@ -17,6 +22,8 @@
         <br><br>
         <input type="submit" value="Login">
     </form>
+    <p id="error-message" class="message"></p>
+    <p id="welcome-message" class="message"></p>
 
     <script>
         const allowList = [
@@ -29,13 +36,21 @@
             const idnumber = document.getElementById('idnumber').value;
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+            const welcomeMessage = document.getElementById('welcome-message');
 
             const user = allowList.find(user => user.username === username && user.idnumber === idnumber && user.password === password);
+
             if (user) {
-                alert('Login successful!');
+                welcomeMessage.textContent = `Welcome, ${username}!`;
+                errorMessage.textContent = '';
+                setTimeout(() => {
+                    window.location.href = 'https://docs.google.com/document/d/1O5fgQY6yx9HS4tTM0XQGBtNVRSUkKCudHCZIj89nwQk/edit?usp=sharing';
+                }, 1000); // Redirect after 1 second to display the welcome message briefly
                 return true;
             } else {
-                alert('Login failed: Username, ID number, or password not allowed.');
+                errorMessage.textContent = 'Login failed: Username, ID number, or password not allowed.';
+                welcomeMessage.textContent = '';
                 return false;
             }
         }
